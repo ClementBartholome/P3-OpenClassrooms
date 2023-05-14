@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
+
+let projectsData = null;
 const gallery = document.querySelector(".gallery");
 
 const allBtn = document.querySelector(".tous");
@@ -19,8 +21,16 @@ class Project {
 }
 
 function getData() {
+  if (projectsData !== null) {
+    return Promise.resolve(projectsData);
+  }
+
   return fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
+    .then((data) => {
+      projectsData = data;
+      return data;
+    })
     .catch((error) => {
       console.error("Une erreur est survenue : ", error);
     });
@@ -47,14 +57,12 @@ function displayAllProjects() {
 }
 
 function displayFilteredProjects(categoryName) {
-  // Récupère les projets
   getData().then((data) => {
-    // Garde les projets dont la catégorie correspond à celle passée en argument
     const filteredArray = data.filter(
       (projet) => projet.category.name === categoryName
     );
     gallery.innerHTML = "";
-    displayProjects(filteredArray); // Afficher les projets filtrés
+    displayProjects(filteredArray);
   });
 }
 
