@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <header>
@@ -27,7 +27,7 @@
     <main>
       <section class="login-form">
         <h2>Log in</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" id="login-form">
           <label for="email">E-mail</label>
           <input type="email" name="email" id="email" required />
           <label for="password">Mot de passe</label>
@@ -47,6 +47,15 @@
         </ul>
       </nav>
     </footer>
-    <script src="./assets/login.js"></script>
+    <script src="./js/models/login_model.js"></script>
+    <script src="./js/views/login_view.js"></script>
+    <script src="./js/controllers/login_controller.js"></script>
+    <script>
+      // Initialisation du MVC
+      const model = new LoginModel();
+      const view = new LoginView();
+      const controller = new LoginController(model, view);
+      controller.initView();
+    </script>
   </body>
 </html>
