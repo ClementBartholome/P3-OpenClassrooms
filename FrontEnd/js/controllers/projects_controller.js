@@ -31,22 +31,24 @@ class ProjectsController {
       });
   }
 
-  addProject() {
+  createProject() {
     // Récupère les valeurs du formulaire et le fichier d'image
     const { value: title } = document.getElementById("title");
     const { value: category } = document.getElementById("category");
     const [image] = this.view.addPhotoBtn.files;
 
-    this.projectsData.addProject(title, category, image).then((data) => {
-      this.view.displayProjects(data);
-    });
+    this.projectsData
+      .addProjectToDatabase(title, category, image)
+      .then((data) => {
+        this.view.displayProjects(data);
+      });
   }
 
   setupEventListeners() {
     // Écouteur d'événement pour le formulaire de la modale
     this.view.modal.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.addProject();
+      this.createProject();
     });
 
     // Écouteur d'événement pour le bouton d'édition

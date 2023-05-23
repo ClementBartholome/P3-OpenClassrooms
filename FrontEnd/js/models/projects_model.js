@@ -62,7 +62,7 @@ class ProjectsModel {
       });
   }
 
-  addProject(title, category, image) {
+  addProjectToDatabase(title, category, image) {
     // Encapsule les données du formulaire dans l'objet formData
     const formData = new FormData();
     formData.append("title", title);
