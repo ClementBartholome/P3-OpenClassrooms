@@ -103,7 +103,7 @@ class ProjectsView {
         </div>
         <form id="modal-form">
           <label for="title">Titre</label>
-          <input type="text" name="title" id="title" required />
+          <input type="text" name="title" id="title" maxlength="40" required />
           <label for="category">Catégorie</label>
           <select name="category" id="category">
             <option value=""></option>
