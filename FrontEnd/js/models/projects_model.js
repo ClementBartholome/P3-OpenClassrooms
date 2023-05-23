@@ -5,10 +5,6 @@
 
 class ProjectsModel {
   constructor() {
-    /* Ancien code */
-    // Copie les propriétés de l'objet data vers l'instance de la classe Project
-    // Object.assign(this, data);
-
     this.projectsData = null;
     // Accède au token via loginStatus pour l'utiliser dans deleteProject()
     this.token = loginStatus.token;
@@ -91,8 +87,3 @@ class ProjectsModel {
       });
   }
 }
-
-/* Ancien code */
-
-// // Stocke les données de projets pour éviter de faire une requête HTTP à chaque fois qu'on filtre les projets
-// Project.projectsData = null;
