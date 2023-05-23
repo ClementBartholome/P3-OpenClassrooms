@@ -43,7 +43,7 @@ class ProjectsController {
   }
 
   setupEventListeners() {
-    // Écouteur d'événement pour le formulaire modal
+    // Écouteur d'événement pour le formulaire de la modale
     this.view.modal.addEventListener("submit", (event) => {
       event.preventDefault();
       this.addProject();
@@ -57,7 +57,7 @@ class ProjectsController {
       this.view.openModal();
     });
 
-    // Écouteur d'événement pour la fermeture du modal
+    // Écouteur d'événement pour la fermeture de la modale
     window.addEventListener("click", (event) => {
       if (
         event.target === this.view.modal ||
@@ -67,7 +67,7 @@ class ProjectsController {
       }
     });
 
-    // Écouteur d'événement pour les actions dans le modal
+    // Écouteur d'événement pour les actions dans la modale
     this.view.modal.addEventListener("click", (event) => {
       if (event.target.classList.contains("trash")) {
         const { projectId } = event.target.dataset;
