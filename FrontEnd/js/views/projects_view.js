@@ -137,10 +137,7 @@ class ProjectsView {
         this.imageElement.style.objectFit = "cover";
 
         // Vide la div add photo
-        while (this.addPhotoDiv.firstChild) {
-          this.addPhotoDiv.firstChild.remove();
-        }
-
+        this.addPhotoDiv.innerHTML = "";
         this.addPhotoDiv.appendChild(this.imageElement);
       };
       // Si un fichier a été sélectionné, lis le fichier en tant qu'URL de données (utilisable en src de <img>)
