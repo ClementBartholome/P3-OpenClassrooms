@@ -273,7 +273,7 @@ nav a:hover {
   flex: 1;
 }
 #introduction h2 {
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 #introduction p {
