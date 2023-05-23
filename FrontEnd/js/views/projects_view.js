@@ -191,10 +191,6 @@ class ProjectsView {
   }
 
   checkFormValidity() {
-    this.titleInput = document.querySelector("#title");
-    this.categorySelect = document.querySelector("#category");
-    this.imageInput = document.querySelector("#add-photo-btn");
-
     this.isTitleValid = this.titleInput.value.trim() !== "";
     this.isCategorySelected = this.categorySelect.value !== "";
     this.isImageSelected =
