@@ -10,6 +10,7 @@ class ProjectsController {
   }
 
   init() {
+    // Affichage et Event Listeners par défaut
     this.view.styleActiveFilterBtn(this.view.allBtn);
     this.displayAllProjects();
     this.setupEventListeners();
@@ -35,6 +36,7 @@ class ProjectsController {
     // Récupère les valeurs du formulaire et le fichier d'image
     const { value: title } = document.getElementById("title");
     const { value: category } = document.getElementById("category");
+    // Récupère le premier élément de l'array files
     const [image] = this.view.addPhotoBtn.files;
 
     this.projectsData
