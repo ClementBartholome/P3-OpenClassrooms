@@ -112,10 +112,12 @@ class ProjectsView {
             <option value="3">Hotels & restaurants</option>
           </select>
           <hr>
-          <input type="submit" value="Valider" class="submit-project">
+          <input type="submit" value="Valider" class="submit-project" id="submit-project">
         </form>
       </div>
     `;
+
+    this.setupFormListeners();
   }
 
   setupPhotoUploadListener() {
@@ -158,5 +160,52 @@ class ProjectsView {
 
   closeModal() {
     this.modal.style.display = "none";
+  }
+
+  enableSubmitButton() {
+    const submitButton = document.querySelector("#submit-project");
+    submitButton.classList.add("submit-ready");
+    submitButton.disabled = false;
+  }
+
+  disableSubmitButton() {
+    const submitButton = document.querySelector("#submit-project");
+    submitButton.classList.remove("submit-ready");
+    submitButton.disabled = true;
+  }
+
+  setupFormListeners() {
+    const titleInput = document.querySelector("#title");
+    const categorySelect = document.querySelector("#category");
+    const imageInput = document.querySelector("#add-photo-btn");
+
+    titleInput.addEventListener("input", () => {
+      this.checkFormValidity();
+    });
+
+    categorySelect.addEventListener("change", () => {
+      this.checkFormValidity();
+    });
+
+    imageInput.addEventListener("change", () => {
+      this.checkFormValidity();
+    });
+  }
+
+  checkFormValidity() {
+    this.titleInput = document.querySelector("#title");
+    this.categorySelect = document.querySelector("#category");
+    this.imageInput = document.querySelector("#add-photo-btn");
+
+    this.isTitleValid = this.titleInput.value.trim() !== "";
+    this.isCategorySelected = this.categorySelect.value !== "";
+    this.isImageSelected =
+      this.file || (this.imageInput.files && this.imageInput.files.length > 0);
+
+    if (this.isTitleValid && this.isCategorySelected && this.isImageSelected) {
+      this.enableSubmitButton();
+    } else {
+      this.disableSubmitButton();
+    }
   }
 }

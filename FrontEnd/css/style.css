@@ -611,3 +611,8 @@ select {
   color: #ffffff;
   border: none;
 }
+
+.submit-ready {
+  background: #1d6154 !important;
+  color: white;
+}
