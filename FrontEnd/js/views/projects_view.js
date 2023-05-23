@@ -116,6 +116,10 @@ class ProjectsView {
         </form>
       </div>
     `;
+    this.titleInput = document.querySelector("#title");
+    this.categorySelect = document.querySelector("#category");
+    this.imageInput = document.querySelector("#add-photo-btn");
+    this.submitButton = document.querySelector("#submit-project");
 
     this.setupFormListeners();
   }
@@ -163,31 +167,25 @@ class ProjectsView {
   }
 
   enableSubmitButton() {
-    const submitButton = document.querySelector("#submit-project");
-    submitButton.classList.add("submit-ready");
-    submitButton.disabled = false;
+    this.submitButton.classList.add("submit-ready");
+    this.submitButton.disabled = false;
   }
 
   disableSubmitButton() {
-    const submitButton = document.querySelector("#submit-project");
-    submitButton.classList.remove("submit-ready");
-    submitButton.disabled = true;
+    this.submitButton.classList.remove("submit-ready");
+    this.submitButton.disabled = true;
   }
 
   setupFormListeners() {
-    const titleInput = document.querySelector("#title");
-    const categorySelect = document.querySelector("#category");
-    const imageInput = document.querySelector("#add-photo-btn");
-
-    titleInput.addEventListener("input", () => {
+    this.titleInput.addEventListener("input", () => {
       this.checkFormValidity();
     });
 
-    categorySelect.addEventListener("change", () => {
+    this.categorySelect.addEventListener("change", () => {
       this.checkFormValidity();
     });
 
-    imageInput.addEventListener("change", () => {
+    this.imageInput.addEventListener("change", () => {
       this.checkFormValidity();
     });
   }
