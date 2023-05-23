@@ -46,19 +46,59 @@ class ProjectsController {
       });
   }
 
-  setupEventListeners() {
-    // Écouteur d'événement pour le formulaire de la modale
-    this.view.modal.addEventListener("submit", (event) => {
-      event.preventDefault();
-      this.createProject();
+  setupFormListeners() {
+    this.view.titleInput.addEventListener("input", () => {
+      this.view.checkFormValidity();
     });
 
+    this.view.categorySelect.addEventListener("change", () => {
+      this.view.checkFormValidity();
+    });
+
+    this.view.imageInput.addEventListener("change", () => {
+      this.view.checkFormValidity();
+    });
+  }
+
+  setupPhotoUploadListener() {
+    this.view.addPhotoBtn.addEventListener("change", (event) => {
+      const [file] = event.target.files;
+      this.file = file;
+      // Permet de lire le contenu du fichier
+      this.reader = new FileReader();
+
+      // Lorsque la lecture du fichier est terminée, crée un élément img et lui attribue la src du fichier
+      this.reader.onload = () => {
+        this.imageElement = document.createElement("img");
+        this.imageElement.src = this.reader.result;
+        this.imageElement.style.width = "30%";
+        this.imageElement.style.height = "100%";
+        this.imageElement.style.objectFit = "cover";
+
+        // Vide la div add photo
+        this.view.addPhotoDiv.innerHTML = "";
+        this.view.addPhotoDiv.appendChild(this.imageElement);
+      };
+      // Si un fichier a été sélectionné, lis le fichier en tant qu'URL de données (utilisable en src de <img>)
+      if (this.file) {
+        this.reader.readAsDataURL(this.file);
+      }
+    });
+  }
+
+  setupEventListeners() {
     // Écouteur d'événement pour le bouton d'édition
     this.view.editButton.addEventListener("click", () => {
       this.projectsData.getAllProjects().then((data) => {
         this.view.displayProjectsInModal(data);
       });
       this.view.openModal();
+    });
+
+    // Écouteur d'événement pour le formulaire de la modale
+    this.view.modal.addEventListener("submit", (event) => {
+      event.preventDefault();
+      this.createProject();
     });
 
     // Écouteur d'événement pour la fermeture de la modale
@@ -78,6 +118,8 @@ class ProjectsController {
         this.projectsData.deleteProject(projectId);
       } else if (event.target.classList.contains("add-project")) {
         this.view.changeModal();
+        this.setupPhotoUploadListener();
+        this.setupFormListeners();
       } else if (event.target.classList.contains("fa-arrow-left")) {
         this.view.createModal();
         this.projectsData.getAllProjects().then((data) => {

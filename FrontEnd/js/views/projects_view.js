@@ -121,41 +121,12 @@ class ProjectsView {
     this.imageInput = document.querySelector("#add-photo-btn");
     this.submitButton = document.querySelector("#submit-project");
 
-    this.setupFormListeners();
-  }
-
-  setupPhotoUploadListener() {
     this.addPhotoBtn = document.querySelector("#add-photo-btn");
     this.addPhotoDiv = document.querySelector("#add-photo");
-
-    this.addPhotoBtn.addEventListener("change", (event) => {
-      const [file] = event.target.files;
-      this.file = file;
-      // Permet de lire le contenu du fichier
-      this.reader = new FileReader();
-
-      // Lorsque la lecture du fichier est terminée, crée un élément img et lui attribue la src du fichier
-      this.reader.onload = () => {
-        this.imageElement = document.createElement("img");
-        this.imageElement.src = this.reader.result;
-        this.imageElement.style.width = "30%";
-        this.imageElement.style.height = "100%";
-        this.imageElement.style.objectFit = "cover";
-
-        // Vide la div add photo
-        this.addPhotoDiv.innerHTML = "";
-        this.addPhotoDiv.appendChild(this.imageElement);
-      };
-      // Si un fichier a été sélectionné, lis le fichier en tant qu'URL de données (utilisable en src de <img>)
-      if (this.file) {
-        this.reader.readAsDataURL(this.file);
-      }
-    });
   }
 
   changeModal() {
     this.changeModalContent();
-    this.setupPhotoUploadListener();
   }
 
   openModal() {
@@ -174,20 +145,6 @@ class ProjectsView {
   disableSubmitButton() {
     this.submitButton.classList.remove("submit-ready");
     this.submitButton.disabled = true;
-  }
-
-  setupFormListeners() {
-    this.titleInput.addEventListener("input", () => {
-      this.checkFormValidity();
-    });
-
-    this.categorySelect.addEventListener("change", () => {
-      this.checkFormValidity();
-    });
-
-    this.imageInput.addEventListener("change", () => {
-      this.checkFormValidity();
-    });
   }
 
   checkFormValidity() {
