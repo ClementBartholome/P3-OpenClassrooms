@@ -194,6 +194,7 @@ class ProjectsView {
     this.isTitleValid = this.titleInput.value.trim() !== "";
     this.isCategorySelected = this.categorySelect.value !== "";
     this.isImageSelected =
+      // Vérifie si une image a été ajoutée précédemment
       this.file || (this.imageInput.files && this.imageInput.files.length > 0);
 
     if (this.isTitleValid && this.isCategorySelected && this.isImageSelected) {
