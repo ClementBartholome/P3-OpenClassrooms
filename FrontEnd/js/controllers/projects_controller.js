@@ -115,6 +115,9 @@ class ProjectsController {
     this.view.modal.addEventListener("click", (event) => {
       if (event.target.classList.contains("trash")) {
         const { projectId } = event.target.dataset;
+        if (!confirm("Voulez-vous vraiment supprimer ce projet ?")) {
+          return; // Annule la suppression si l'utilisateur clique sur Annuler
+        }
         this.projectsData.deleteProject(projectId);
       } else if (event.target.classList.contains("add-project")) {
         this.view.changeModal();
