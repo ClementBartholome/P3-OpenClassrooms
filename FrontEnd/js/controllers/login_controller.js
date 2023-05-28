@@ -42,6 +42,9 @@ class LoginController {
 
   // Lorsque le formulaire est soumis, appelle onSubmit pour vérifier la connexion
   initView() {
-    this.view.addFormSubmitHandler(() => this.onSubmit());
+    this.view.formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.onSubmit();
+    });
   }
 }

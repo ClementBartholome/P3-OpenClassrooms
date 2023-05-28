@@ -23,11 +23,4 @@ class LoginView {
     this.emailEl.value = "";
     this.passwordEl.value = "";
   }
-
-  addFormSubmitHandler(handler) {
-    this.formEl.addEventListener("submit", (e) => {
-      e.preventDefault();
-      handler();
-    });
-  }
 }
