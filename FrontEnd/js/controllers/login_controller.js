@@ -8,7 +8,7 @@ class LoginController {
   }
 
   onSubmit() {
-    // Récupère les valeurs du form depuis la vue et met à jour le model
+    // Récupère les valeurs du form depuis la vue
     const { email, password } = this.view.getFormValues();
     this.model.setEmail(email);
     this.model.setPassword(password);
