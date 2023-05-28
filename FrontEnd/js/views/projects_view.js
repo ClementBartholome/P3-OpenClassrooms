@@ -23,7 +23,6 @@ class ProjectsView {
   displayProjects(projectsArray) {
     this.gallery.innerHTML = "";
 
-    // Crée une nouvelle instance de la classe Project pour chaque projet dans le tableau passé en argument
     for (let i = 0; i < projectsArray.length; i += 1) {
       const project = projectsArray[i];
       this.gallery.innerHTML += `
