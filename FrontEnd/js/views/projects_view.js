@@ -4,15 +4,8 @@
 class ProjectsView {
   constructor() {
     this.filtersList = document.querySelector("#filtres");
-    this.createFilterButtons();
     this.gallery = document.querySelector(".gallery");
-    this.filterButtonsArray = [
-      (this.allBtn = document.querySelector(".tous")),
-      (this.objetsBtn = document.querySelector(".objets")),
-      (this.appartementsBtn = document.querySelector(".apparts")),
-      (this.hotelsRestaurantsBtn = document.querySelector(".hotels")),
-    ];
-
+    this.filterButtonsArray = [];
     this.modal = document.querySelector("#modal");
     this.createModal();
     this.editButton = document.querySelector("#edit-button");
@@ -34,6 +27,21 @@ class ProjectsView {
     }
   }
 
+  displayFilterButtons(categoriesArray) {
+    this.filtersList.innerHTML = `<button class="tous active-button">Tous</button>`;
+    const allBtn = document.querySelector(".tous");
+    this.filterButtonsArray.push(allBtn);
+
+    for (let i = 0; i < categoriesArray.length; i += 1) {
+      const category = categoriesArray[i];
+      const button = document.createElement("button");
+      button.className = category;
+      button.innerText = category;
+      this.filtersList.appendChild(button);
+      this.filterButtonsArray.push(button);
+    }
+  }
+
   styleActiveFilterBtn(clickedButton) {
     // Boucle dans un array avec tous les boutons de filtre
     this.filterButtonsArray.forEach((button) => {
@@ -44,15 +52,6 @@ class ProjectsView {
     // Applique le style du bouton de filtre actif / cliqué
     clickedButton.classList.add("active-button");
     clickedButton.classList.remove("default-button");
-  }
-
-  createFilterButtons() {
-    this.filtersList.innerHTML = `
-      <button class="tous">Tous</button>
-      <button class="objets">Objets</button>
-      <button class="apparts">Appartements</button>
-      <button class="hotels">Hôtels & Restaurants</button>
-      `;
   }
 
   createModal() {

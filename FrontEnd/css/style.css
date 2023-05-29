@@ -293,18 +293,14 @@ nav a:hover {
 #filtres button {
   box-sizing: border-box;
   border: 1px solid #1d6154;
+  color: #1d6154;
   border-radius: 60px;
   font-size: 16px;
   font-weight: bold;
   padding: 10px 25px;
 }
 
-.default-button {
-  color: #1d6154;
-  background-color: white;
-}
-
-.active-button {
+#filtres button.active-button {
   color: white;
   background-color: #1d6154;
 }

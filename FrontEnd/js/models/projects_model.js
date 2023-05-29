@@ -6,6 +6,7 @@
 class ProjectsModel {
   constructor() {
     this.projectsData = null;
+    this.projectsCategories = null;
     // Accède au token via loginStatus pour l'utiliser dans deleteProject()
     this.token = loginStatus.token;
   }
@@ -21,6 +22,20 @@ class ProjectsModel {
       .then((data) => {
         this.projectsData = data;
         return data;
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue : ", error);
+      });
+  }
+
+  getProjectsCategories() {
+    return this.getAllProjects()
+      .then((data) => {
+        // Itère sur chaque projet dans le tableau de données et stocke le nom de sa catégorie dans le tableau categories
+        const categories = data.map((project) => project.category.name);
+        // Créer un nouveau tableau de catégories sans doublons grâce à l'objet Set
+        const uniqueCategories = [...new Set(categories)];
+        return uniqueCategories;
       })
       .catch((error) => {
         console.error("Une erreur est survenue : ", error);

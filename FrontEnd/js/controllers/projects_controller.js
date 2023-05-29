@@ -11,7 +11,7 @@ class ProjectsController {
 
   init() {
     // Affichage et Event Listeners par défaut
-    this.view.styleActiveFilterBtn(this.view.allBtn);
+    this.createFilterButtons();
     this.displayAllProjects();
     this.setupEventListeners();
   }
@@ -44,6 +44,26 @@ class ProjectsController {
       .then((data) => {
         this.view.displayProjects(data);
       });
+  }
+
+  createFilterButtons() {
+    this.projectsData.getProjectsCategories().then((categoriesArray) => {
+      this.view.displayFilterButtons(categoriesArray);
+      this.setupFilterButtonListeners();
+    });
+  }
+
+  setupFilterButtonListeners() {
+    this.view.filterButtonsArray.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.view.styleActiveFilterBtn(button);
+        if (button.classList.contains("tous")) {
+          this.displayAllProjects(); // Afficher tous les projets si le bouton "Tous" est cliqué
+        } else {
+          this.displayProjectsByCategory(button.textContent);
+        }
+      });
+    });
   }
 
   setupFormListeners() {
@@ -129,27 +149,6 @@ class ProjectsController {
           this.view.displayProjectsInModal(data);
         });
       }
-    });
-
-    // Écouteurs d'événement pour les boutons de filtre
-    this.view.allBtn.addEventListener("click", () => {
-      this.view.styleActiveFilterBtn(this.view.allBtn);
-      this.displayAllProjects();
-    });
-
-    this.view.objetsBtn.addEventListener("click", () => {
-      this.view.styleActiveFilterBtn(this.view.objetsBtn);
-      this.displayProjectsByCategory("Objets");
-    });
-
-    this.view.appartementsBtn.addEventListener("click", () => {
-      this.view.styleActiveFilterBtn(this.view.appartementsBtn);
-      this.displayProjectsByCategory("Appartements");
-    });
-
-    this.view.hotelsRestaurantsBtn.addEventListener("click", () => {
-      this.view.styleActiveFilterBtn(this.view.hotelsRestaurantsBtn);
-      this.displayProjectsByCategory("Hotels & restaurants");
     });
   }
 }
